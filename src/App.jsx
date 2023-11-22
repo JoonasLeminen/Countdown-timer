@@ -19,32 +19,39 @@ const Description = () => {
   )
 }
 
-const TimeConverter = ({time}) => {
-  /*if (time > 60) {
-    time = time / 60
+const TimeConverter = ({ time }) => {
+  if (time > 60) {
+    let minute = Math.floor(time/60)
+    return (
+      <div>
+        {minute} min {time%60} sek
+      </div>
+    )
   } else {
-    time = time
-  }*/
-
   return (
     <div>
-      {time} sekuntia
+      {time} sek
     </div>
   )
 }
+}
 
 const CountdownTimer = ({ time, setTime }) => {
+
+  //https://pixabay.com/sound-effects/short-success-sound-glockenspiel-treasure-video-game-6346/
+  let timerFinish = new Audio("/alertsound/short-success-sound-glockenspiel-treasure-video-game-6346.mp3")
 
   const startTimer = () => {
     let stopTime = time
     console.log("käynnistä ajastin!")
     const intervalID = setInterval(() => {
       setTime(time => time - 1)
-      console.log(time)
-      console.log(stopTime)
+      //console.log(time)
+      //console.log(stopTime)
       if (--stopTime === 0) {
         clearInterval(intervalID)
         console.log("pysähtyy!")
+        timerFinish.play()
       }
     }, 1000)
   }
@@ -90,9 +97,11 @@ const CountdownTimer = ({ time, setTime }) => {
   }
 
   return (
-    <div>
-      <div className="timer">Ajastin, aseta alta ajastimeen aika
-        <button className="startButton" onClick={startTimer}>
+    <div className="countdownBox">
+      <div className="timerTitle">Aseta alta ajastimeen aika
+      </div>
+      <div className="startResetButtonBox">
+      <button className="startButton" onClick={startTimer}>
           Käynnistä
         </button>
         <button className="resetButton" onClick={resetTimer}>
@@ -100,25 +109,25 @@ const CountdownTimer = ({ time, setTime }) => {
         </button>
       </div>
       <div className="timerNumber">
-        <TimeConverter time={time}/>
+        <TimeConverter time={time} />
       </div>
-      <div className="setTime">
+      <div className="timeButtonBox">
         <div>
-          <button onClick={add15Minutes}>
+          <button className="timeButton" onClick={add15Minutes}>
             + 15 Minuuttia
           </button>
-          <button onClick={addMinute}>
+          <button className="timeButton" onClick={addMinute}>
             +1 Minuutti
           </button>
-          <button onClick={removeMinute}>
+          <button className="timeButton" onClick={removeMinute}>
             -1 Minuutti
           </button>
         </div>
         <div>
-          <button onClick={addSecond}>
+          <button className="timeButton" onClick={addSecond}>
             +1 Sekunti
           </button>
-          <button onClick={removeSecond}>
+          <button className="timeButton" onClick={removeSecond}>
             -1 Sekunti
           </button>
         </div>
@@ -133,8 +142,8 @@ const App = () => {
   return (
     <div>
       <CountdownTimer time={time} setTime={setTime} />
-      <Footer />
       <Description />
+      <Footer />
     </div>
   )
 }

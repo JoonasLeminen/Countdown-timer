@@ -1,28 +1,85 @@
+/* Basic setup */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    /* 1rem = 10px */
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    background-color: whitesmoke;
+}
+
 /* Timer */
 
-.timer {
+.countdownBox {
     text-align: center;
-    padding: 50px;
+    border-bottom: solid .1rem black;
+    border-left: solid .1rem black;
+    border-right: solid .1rem black;
+    border-top: solid .1rem black;
+    background-color: #ff6b86;
+    margin: auto;
+    width: 40%;
+    margin-top: 1rem;
+}
+
+.timerTitle {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .startButton {
-    margin-left: 10px;
+    padding: 1rem 2rem;
+    margin-left: 1rem;
+    background-color: #fc93a6;
+}
+
+.resetButton {
+    padding: .5rem .5rem;
+    margin-left: 1rem;
+}
+
+.startResetButtonBox {
+    text-align: center;
+    margin-bottom: 5rem;
 }
 
 .timerNumber {
     text-align: center;
-    padding: 10px;
+    padding: 1rem;
 }
 
 .setTime {
     text-align: center;
 }
 
+.timeButtonBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.timeButton {
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    background-color: #fc93a6;
+}
+
 /* Body */
 
 .description {
     text-align: center;
-    padding: 100px;
+    margin-top: 2rem;
+    border-width: 50%;
 }
 
 /* Footer */
@@ -31,5 +88,5 @@
     font-style: italic;
     position: absolute;
     bottom: 0;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
