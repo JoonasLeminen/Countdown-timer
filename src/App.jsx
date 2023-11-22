@@ -19,6 +19,20 @@ const Description = () => {
   )
 }
 
+const TimeConverter = ({time}) => {
+  /*if (time > 60) {
+    time = time / 60
+  } else {
+    time = time
+  }*/
+
+  return (
+    <div>
+      {time} sekuntia
+    </div>
+  )
+}
+
 const CountdownTimer = ({ time, setTime }) => {
 
   const startTimer = () => {
@@ -38,7 +52,7 @@ const CountdownTimer = ({ time, setTime }) => {
   const resetTimer = () => {
     console.log("reset")
     if (window.confirm("Haluatko varmasti nollata ajastimen?")) {
-      setTime(0)
+      window.location.reload()
     }
   }
 
@@ -61,6 +75,11 @@ const CountdownTimer = ({ time, setTime }) => {
     setTime(time + 60)
   }
 
+  const add15Minutes = () => {
+    console.log("lisää 15 minuuttia")
+    setTime(time + 900)
+  }
+
   const removeMinute = () => {
     console.log("poista minuutti")
     if (time >= 60) {
@@ -81,21 +100,28 @@ const CountdownTimer = ({ time, setTime }) => {
         </button>
       </div>
       <div className="timerNumber">
-        {time}
+        <TimeConverter time={time}/>
       </div>
       <div className="setTime">
-        <button onClick={addMinute}>
-          +1 Minuutti
-        </button>
-        <button onClick={removeMinute}>
-          -1 Minuutti
-        </button>
-        <button onClick={addSecond}>
-          +1 Sekunti
-        </button>
-        <button onClick={removeSecond}>
-          -1 Sekunti
-        </button>
+        <div>
+          <button onClick={add15Minutes}>
+            + 15 Minuuttia
+          </button>
+          <button onClick={addMinute}>
+            +1 Minuutti
+          </button>
+          <button onClick={removeMinute}>
+            -1 Minuutti
+          </button>
+        </div>
+        <div>
+          <button onClick={addSecond}>
+            +1 Sekunti
+          </button>
+          <button onClick={removeSecond}>
+            -1 Sekunti
+          </button>
+        </div>
       </div>
     </div>
   )
