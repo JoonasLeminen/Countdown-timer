@@ -14,7 +14,7 @@ html {
 body {
     font-family: 'Oswald', sans-serif;
     font-size: 2rem;
-    background-color: whitesmoke;
+    background-color: black;
 }
 
 /* Timer */
@@ -26,9 +26,10 @@ body {
     border-right: solid .1rem black;
     border-top: solid .1rem black;
     background-color: #ff6b86;
+    border-color: white;
     margin: auto;
     width: 40%;
-    margin-top: 1rem;
+    margin-top: 10rem;
 }
 
 .timerTitle {
@@ -39,12 +40,12 @@ body {
 .startButton {
     padding: 1rem 2rem;
     margin-left: 1rem;
+    margin-right: 1rem;
     background-color: #fc93a6;
 }
 
 .resetButton {
     padding: .5rem .5rem;
-    margin-left: 1rem;
 }
 
 .startResetButtonBox {
@@ -80,6 +81,7 @@ body {
     text-align: center;
     margin-top: 2rem;
     border-width: 50%;
+    color: white;
 }
 
 /* Footer */
@@ -89,4 +91,5 @@ body {
     position: absolute;
     bottom: 0;
     margin-bottom: 1rem;
+    color: white;
 }

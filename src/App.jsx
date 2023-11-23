@@ -21,40 +21,45 @@ const Description = () => {
 
 const TimeConverter = ({ time }) => {
   if (time > 60) {
-    let minute = Math.floor(time/60)
+    let minute = Math.floor(time / 60)
     return (
       <div>
-        {minute} min {time%60} sek
+        {minute} min {time % 60} sek
       </div>
     )
   } else {
-  return (
-    <div>
-      {time} sek
-    </div>
-  )
-}
+    return (
+      <div>
+        {time} sek
+      </div>
+    )
+  }
 }
 
-const CountdownTimer = ({ time, setTime }) => {
+const CountdownTimer = ({ time, setTime, show, setShow }) => {
 
   //https://pixabay.com/sound-effects/short-success-sound-glockenspiel-treasure-video-game-6346/
   let timerFinish = new Audio("/alertsound/short-success-sound-glockenspiel-treasure-video-game-6346.mp3")
 
   const startTimer = () => {
-    let stopTime = time
-    console.log("käynnistä ajastin!")
-    const intervalID = setInterval(() => {
-      setTime(time => time - 1)
-      //console.log(time)
-      //console.log(stopTime)
-      if (--stopTime === 0) {
-        clearInterval(intervalID)
-        console.log("pysähtyy!")
-        timerFinish.play()
-      }
-    }, 1000)
+    if (time > 0) {
+      setShow(true)
+      let stopTime = time
+      console.log("käynnistä ajastin!")
+      const intervalID = setInterval(() => {
+        setTime(time => time - 1)
+        //console.log(time)
+        //console.log(stopTime)
+        if (--stopTime === 0) {
+          clearInterval(intervalID)
+          console.log("pysähtyy!")
+          timerFinish.play()
+          setShow(false)
+        }
+      }, 1000)
+    }
   }
+
 
   const resetTimer = () => {
     console.log("reset")
@@ -66,6 +71,11 @@ const CountdownTimer = ({ time, setTime }) => {
   const addSecond = () => {
     console.log("lisää sekunti")
     setTime(time + 1)
+  }
+
+  const add15Seconds = () => {
+    console.log("lisää 15 sekuntia")
+    setTime(time + 15)
   }
 
   const removeSecond = () => {
@@ -101,9 +111,9 @@ const CountdownTimer = ({ time, setTime }) => {
       <div className="timerTitle">Aseta alta ajastimeen aika
       </div>
       <div className="startResetButtonBox">
-      <button className="startButton" onClick={startTimer}>
+        {!show && <button className="startButton" onClick={startTimer}>
           Käynnistä
-        </button>
+        </button>}
         <button className="resetButton" onClick={resetTimer}>
           Reset
         </button>
@@ -113,23 +123,26 @@ const CountdownTimer = ({ time, setTime }) => {
       </div>
       <div className="timeButtonBox">
         <div>
-          <button className="timeButton" onClick={add15Minutes}>
+          {!show && <button className="timeButton" onClick={add15Minutes}>
             + 15 Minuuttia
-          </button>
-          <button className="timeButton" onClick={addMinute}>
+          </button>}
+          {!show && <button className="timeButton" onClick={addMinute}>
             +1 Minuutti
-          </button>
-          <button className="timeButton" onClick={removeMinute}>
+          </button>}
+          {!show && <button className="timeButton" onClick={removeMinute}>
             -1 Minuutti
-          </button>
+          </button>}
         </div>
         <div>
-          <button className="timeButton" onClick={addSecond}>
+          {!show && <button className="timeButton" onClick={add15Seconds}>
+            +15 Sekuntia
+          </button>}
+          {!show && <button className="timeButton" onClick={addSecond}>
             +1 Sekunti
-          </button>
-          <button className="timeButton" onClick={removeSecond}>
+          </button>}
+          {!show && <button className="timeButton" onClick={removeSecond}>
             -1 Sekunti
-          </button>
+          </button>}
         </div>
       </div>
     </div>
@@ -138,10 +151,12 @@ const CountdownTimer = ({ time, setTime }) => {
 
 const App = () => {
   const [time, setTime] = useState(0)
+  const [show, setShow] = useState(false)
 
   return (
     <div>
-      <CountdownTimer time={time} setTime={setTime} />
+      <CountdownTimer time={time} setTime={setTime}
+        show={show} setShow={setShow} />
       <Description />
       <Footer />
     </div>
